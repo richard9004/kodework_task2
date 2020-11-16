@@ -169,7 +169,7 @@
                   	      	image_path="https://www.indianbankseauction.com/PropertyImages/nopreview.jpeg";
                   	      }
                   	      
-                          $('.product-content-div').append(' <div class="col-sm-3"><div class="card"><img class="card-img-top" src="'+image_path+'" alt="Card image cap"><div class="card-body"><h5 class="card-title">'+prdouct_data.name+'</h5><p class="card-text">Price: '+prdouct_data.price+'</p><p>GST: '+prdouct_data.gst+'</p><a class="btn btn-primary get_product_view_data '+prdouct_data.id+'" data-toggle="modal" data-target="#myModal">View</a></div></div></div>');
+                          $('.product-content-div').append(' <div class="col-sm-3"><div class="card"><img class="card-img-top" src="'+image_path+'" style="width:250px;height:200px" alt="Card image cap"><div class="card-body"><h5 class="card-title">'+prdouct_data.name+'</h5><p class="card-text">Price: '+prdouct_data.price+'</p><p>GST: '+prdouct_data.gst+'</p><a class="btn btn-primary get_product_view_data '+prdouct_data.id+'" data-toggle="modal" data-target="#myModal">View</a></div></div></div>');
                   }); 
                  }
                 
@@ -230,7 +230,8 @@ $(document).on("click",".get_product_view_data",function() {
       <!-- Modal body -->
       <div class="modal-body">
       	 <div class="row">
-      	 	<img src="" class="img img-responsive img-rounded product_image">
+      	 	<div class="col-sm-12"><img src="" class="img img-responsive img-rounded product_image" style="width: 400px;"></div>
+      	 	
       	 </div>
           <table class="table">
           	 <tr>
