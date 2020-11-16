@@ -53,7 +53,7 @@
             </div>
           </div>   
           <div class="col-sm-4">	
-          	 <a href="" class="btn btn-sm btn-primary">Reset</a>
+          	 <a href="{{ url('store-listing') }}" class="btn btn-sm btn-primary">Reset</a>
           </div>
        </div>	
 
@@ -169,7 +169,7 @@
                   	      	image_path="https://www.indianbankseauction.com/PropertyImages/nopreview.jpeg";
                   	      }
                   	      
-                          $('.product-content-div').append(' <div class="col-sm-3"><div class="card"><img class="card-img-top" src="'+image_path+'" alt="Card image cap"><div class="card-body"><h5 class="card-title">'+prdouct_data.name+'</h5><p class="card-text">Price: '+prdouct_data.price+'</p><a class="btn btn-primary get_product_view_data '+prdouct_data.id+'" data-toggle="modal" data-target="#myModal">View</a></div></div></div>');
+                          $('.product-content-div').append(' <div class="col-sm-3"><div class="card"><img class="card-img-top" src="'+image_path+'" alt="Card image cap"><div class="card-body"><h5 class="card-title">'+prdouct_data.name+'</h5><p class="card-text">Price: '+prdouct_data.price+'</p><p>GST: '+prdouct_data.gst+'</p><a class="btn btn-primary get_product_view_data '+prdouct_data.id+'" data-toggle="modal" data-target="#myModal">View</a></div></div></div>');
                   }); 
                  }
                 
