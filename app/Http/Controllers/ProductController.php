@@ -68,6 +68,16 @@ class ProductController extends Controller
          return redirect()->back()->withInput()->with('errors', $validation->errors() );
       }
 
+
+       // upload the image //
+      $file = $request->file('product_image');
+      $destination_path = 'uploads/images';
+      $filename = str_random(6).'_'.$file->getClientOriginalName();
+      $file->move($destination_path, $filename);
+
+
+
+
      //echo $request->price;exit;
 
         $data=array(
@@ -77,6 +87,7 @@ class ProductController extends Controller
             'gst_type' => $request->gst_type,
             'quantity' => $request->quantity,
             'user_id' => auth()->user()->id,
+            'path'=> $filename,
             'created_at'=> date('Y-m-d H:i:s'),
             'updated_at'=> date('Y-m-d H:i:s')
         );
@@ -227,12 +238,29 @@ class ProductController extends Controller
          return redirect()->back()->withInput()->with('errors', $validation->errors() );
       }
 
+      if ($request->hasFile('product_image')) {
+    //    
+           $file = $request->file('product_image');
+
+           $destination_path = 'uploads/images';
+           $filename = str_random(6).'_'.$file->getClientOriginalName();
+           
+           $file->move($destination_path, $filename);
+          // $image->file = $destination_path.'/'.$filename;
+          // echo $image->file;exit;
+
+           $path= $destination_path.'/'.$filename;
+       }else{
+           $filename = $request->old_path;
+      }
+
        $data=array(
             'name'     => $request->name,
             'price' => $request->price,
             'gst' => $request->gst,
             'gst_type' => $request->gst_type,
             'quantity' => $request->quantity,
+            'path'=>$filename,
             'updated_at'=> date('Y-m-d H:i:s')
         );
 

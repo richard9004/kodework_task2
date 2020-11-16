@@ -30,7 +30,7 @@
                @if(session()->has('error'))
            <div  class="alert alert-danger" style="text-align:center">  {{ session()->get('error') }} </div>
           @endif
-                     <form method="post" action="{{ url('save-product') }}">
+                     <form method="post" action="{{ url('save-product') }}" enctype="multipart/form-data">
                      	    {!! csrf_field() !!}
   <div class="form-group">
     <label for="exampleInputEmail1" class="bold-label">Product Name</label>
@@ -69,6 +69,8 @@
                       @endif
   </div>
 
+
+
    <div class="form-group">
     <label for="exampleInputEmail1" class="bold-label">Quantity</label>
     <input type="text" class="form-control" id="quantity" value="{{ old('quantity') }}" name="quantity" aria-describedby="emailHelp" placeholder="Enter Product Quantity">
@@ -76,6 +78,14 @@
                       <div class="error_message">{{ $errors->first('quantity') }}</div>
                       @endif
   </div>
+
+   <div class="form-group mb-4">
+                                        <label>Upload Image</label>
+                                        <input class="form-control" type="file" name="product_image" placeholder="Upload Video">
+                                        <div class="error" style="color:red">{{ $errors->first('product_image') }}</div>
+                                    </div>
+
+
  
   <button type="submit" class="btn btn-primary">Save Product</button>
 </form>

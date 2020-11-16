@@ -7,13 +7,19 @@
      <script src="{{ URL::to('https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js') }}"></script>
      <script src="{{ URL::to('https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js') }}"></script>
      <script src="{{ URL::to('https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js') }}"></script>
+
+     <style type="text/css">
+     	 .search_bar{
+     	 	margin-top: 20px;
+     	 }
+     </style>
 </head>
 <body>
 	 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <a class="navbar-brand" href="#">Product Manager</a>
      </nav>
    <div class="container">
-       <div class="row breadcrumb">
+       <div class="row breadcrumb search_bar">
      <div class="col-sm-3">
           	   <div class="form-group">
                  
@@ -74,7 +80,9 @@
 
 
 <script type="text/javascript">
+	var base_url="{{URL::to('/') }}";
 	$(document).ready(function(){
+
 
  var sort_by=$('#by-sort').val();
            var search_by_name=$('#search_by_name').val();
@@ -155,7 +163,13 @@
                   }else{
 
                   $.each(personObject, function(index,prdouct_data) {
-                          $('.product-content-div').append(' <div class="col-sm-3"><div class="card"><img class="card-img-top" src="https://images.unsplash.com/photo-1494548162494-384bba4ab999?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" alt="Card image cap"><div class="card-body"><h5 class="card-title">'+prdouct_data.name+'</h5><p class="card-text">Price: '+prdouct_data.price+'</p><a class="btn btn-primary get_product_view_data '+prdouct_data.id+'" data-toggle="modal" data-target="#myModal">View</a></div></div></div>');
+                  	      if(prdouct_data.path!=""){
+ 						    image_path=base_url+"/uploads/images/"+prdouct_data.path;
+                  	      }else{
+                  	      	image_path="https://www.indianbankseauction.com/PropertyImages/nopreview.jpeg";
+                  	      }
+                  	      
+                          $('.product-content-div').append(' <div class="col-sm-3"><div class="card"><img class="card-img-top" src="'+image_path+'" alt="Card image cap"><div class="card-body"><h5 class="card-title">'+prdouct_data.name+'</h5><p class="card-text">Price: '+prdouct_data.price+'</p><a class="btn btn-primary get_product_view_data '+prdouct_data.id+'" data-toggle="modal" data-target="#myModal">View</a></div></div></div>');
                   }); 
                  }
                 
@@ -184,8 +198,13 @@ $(document).on("click",".get_product_view_data",function() {
                   //console.log(data);
                   var personObject = JSON.parse(data); //parse json string into JS object
                   //console.log(personObject);
-
+ if(personObject[0].path!=""){
+ 						    view_path=base_url+"/uploads/images/"+personObject[0].path;
+                  	      }else{
+                  	      	view_path="https://www.indianbankseauction.com/PropertyImages/nopreview.jpeg";
+                  	      }
                   $('.product_name').text(personObject[0].name);
+                  $('.product_image').attr("src", view_path);
                   $('.product_price').text(personObject[0].price);
                   $('.product_gst').text(personObject[0].gst);
                   $('.product_created').text(personObject[0].created_at);
@@ -210,6 +229,9 @@ $(document).on("click",".get_product_view_data",function() {
 
       <!-- Modal body -->
       <div class="modal-body">
+      	 <div class="row">
+      	 	<img src="" class="img img-responsive img-rounded product_image">
+      	 </div>
           <table class="table">
           	 <tr>
           	 	 <th>Name</th>

@@ -77,6 +77,13 @@
                       <div class="error_message">{{ $errors->first('quantity') }}</div>
                       @endif
   </div>
+
+    <div class="form-group mb-4">
+                                        <label>Upload Image</label>
+                                        <input class="form-control" type="file" name="product_image" placeholder="Upload Video" value="{{ $data->path }}">
+
+                                        <div class="error_message" style="color:red">{{ $errors->first('product_image') }}</div>
+                                    </div>
  
   <button type="submit" class="btn btn-primary">Update Product</button>
  {!! Form::close() !!}
