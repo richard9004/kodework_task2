@@ -46,5 +46,9 @@ class HomeController extends Controller
          return view('viewpanel.api_details')->with('title','API Details');
     }
 
+    public function store_listing(){
+         return view('viewpanel.store_listing')->with('title','Store Listing');
+    }
+
    
 }

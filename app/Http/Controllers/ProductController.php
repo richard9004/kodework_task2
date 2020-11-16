@@ -110,6 +110,8 @@ class ProductController extends Controller
              
            
         }
+
+
         
         $data = $query->where('user_id',auth()->user()->id)->paginate(5);
 
@@ -117,6 +119,63 @@ class ProductController extends Controller
 
 
     } 
+
+    public function display_products_with_filters(Request $request){
+        
+        $query = DB::table('products');
+
+        
+
+       
+
+         if(isset($request->search_by_name) && !empty($request->search_by_name)){
+              
+             $query->where('name','like','%'.$request->search_by_name.'%');
+             
+           
+        }
+
+        
+
+        if(isset($request->sort_by) && !empty($request->sort_by)){
+
+             if($request->sort_by=="by_date"){
+                $query->orderBy('created_at', 'DESC');
+             }
+
+
+             if($request->sort_by=="price_low_to_high"){
+                $query->orderBy('price', 'ASC');
+             }
+
+              if($request->sort_by=="price_high_to_low"){
+                $query->orderBy('price', 'DESC');
+             }
+              
+            
+             
+           
+        }
+
+        if(isset($request->number_of_records) && !empty($request->number_of_records)){
+
+            if($request->number_of_records!='all'){
+                $query->limit($request->number_of_records);
+            }
+              
+             
+             
+           
+        }
+
+
+        
+        $data = $query->get();
+
+        echo json_encode($data);exit;
+
+       
+    }
 
    
 
@@ -136,6 +195,16 @@ class ProductController extends Controller
          echo json_encode($data);exit;
               
     }
+
+    
+    public function view_product_store(Request $request){
+
+         $data = DB::table('products')->where('id',$request->product_id)->get();
+         echo json_encode($data);exit;
+              
+    }
+
+    
 
      public function edit_product($id)
      {

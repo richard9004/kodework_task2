@@ -18,8 +18,11 @@
 
 Route::get('login',['as'=>'login','uses'=>'LoginController@index']);
 Route::get('register-new-user',['as'=>'login','uses'=>'LoginController@register']);
+Route::get('store-listing', 'HomeController@store_listing');
 Route::post('save-user', 'LoginController@save_user');
 Route::post('check-login', 'LoginController@authenticate_user');
+Route::post('view-product-store', 'ProductController@view_product_store');
+Route::post('display-products-with-filters', 'ProductController@display_products_with_filters');
   Route::get('api-product-details/{apikey}', 'ProductController@api_product_details');
 
 
